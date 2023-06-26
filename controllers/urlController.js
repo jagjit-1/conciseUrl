@@ -6,6 +6,7 @@ const { isEmpty, isString } = require('lodash');
 const AsyncWrapper = require("../utils/AsyncWrapper");
 const AppError = require("../utils/AppError");
 
+const { PORT,URL } = process.env;
 
 const generateUrlHash = (url) => {
     if (!isString(url)) throw new AppError("Invalid Url", 400);
@@ -35,7 +36,7 @@ const createUrl = AsyncWrapper(async (req, res) => {
 
     res.status(200).json({
         status: "success",
-        shortUrl: `http://localhost:3000/surl/${response.urlHash}`
+        shortUrl: `${URL}:${PORT}/surl/${response.urlHash}`
     })
 })
 
